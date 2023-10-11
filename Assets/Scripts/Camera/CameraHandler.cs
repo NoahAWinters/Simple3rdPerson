@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace STP
+namespace Souls
 {
     public class CameraHandler : MonoBehaviour
     {

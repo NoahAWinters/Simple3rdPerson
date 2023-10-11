@@ -24,7 +24,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Locomotion"",
             ""id"": ""7e8ef548-4217-4883-a5cb-8323ba8a0302"",
             ""actions"": [
                 {
@@ -32,7 +32,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""59bf9427-40ba-43c5-b344-fce8604a0b13"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
@@ -52,7 +52,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""b47d1d3a-3ec8-4371-8f99-b81c6d2fc7d6"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": ""Controller"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
@@ -129,9 +129,180 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""2ce49aef-90ca-4f4d-b6f5-c8855534fa86"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": ""NormalizeVector2,StickDeadzone(min=0.125,max=0.5)"",
                     ""groups"": ""Keeb"",
                     ""action"": ""Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Actions"",
+            ""id"": ""bf6e5eac-1acb-45e9-a429-41e9582b9279"",
+            ""actions"": [
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""6709b1b4-bcd4-4f5c-9598-f834b6ab26bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack_right"",
+                    ""type"": ""Button"",
+                    ""id"": ""e48789f5-7806-4c34-a663-1249ba469f9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap(pressPoint=0.001)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack_right"",
+                    ""type"": ""Button"",
+                    ""id"": ""73a6b9e2-cab7-466d-b356-f46610d36e7a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7a1f6979-9798-4ece-a363-dbf10af104ab"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keeb"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f88930c-e94c-42de-b43d-526b305b56e8"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3f91ce0-fab6-4ece-9e75-99f183658a13"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""LightAttack_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13b130cc-a8c4-4162-944c-66786cb2b270"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keeb"",
+                    ""action"": ""LightAttack_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0e61b1d-278e-483e-9fb0-23eb2a871db6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keeb"",
+                    ""action"": ""HeavyAttack_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""917eed6b-6a27-4d0b-b0cf-dc9e71f623f5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keeb"",
+                    ""action"": ""HeavyAttack_right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""DPAD"",
+            ""id"": ""13d578c9-f6a7-457d-966e-7e3309c7bd61"",
+            ""actions"": [
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c041214-96e2-4c91-bbbb-c2e74df505a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""257e420a-7a63-4967-a735-97da56e7a738"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""91c434b1-ea43-4d7c-aa25-e91d6b785fe0"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c151158-c879-4ab6-879e-cc271cc72e58"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keeb"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7426d44b-ded5-4aac-8554-e1763a77e426"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cfdca47-4dbe-4989-a7b6-589a9d72da14"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keeb"",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -163,10 +334,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        // Locomotion
+        m_Locomotion = asset.FindActionMap("Locomotion", throwIfNotFound: true);
+        m_Locomotion_Movement = m_Locomotion.FindAction("Movement", throwIfNotFound: true);
+        m_Locomotion_Camera = m_Locomotion.FindAction("Camera", throwIfNotFound: true);
+        // Actions
+        m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
+        m_Actions_Roll = m_Actions.FindAction("Roll", throwIfNotFound: true);
+        m_Actions_LightAttack_right = m_Actions.FindAction("LightAttack_right", throwIfNotFound: true);
+        m_Actions_HeavyAttack_right = m_Actions.FindAction("HeavyAttack_right", throwIfNotFound: true);
+        // DPAD
+        m_DPAD = asset.FindActionMap("DPAD", throwIfNotFound: true);
+        m_DPAD_Left = m_DPAD.FindAction("Left", throwIfNotFound: true);
+        m_DPAD_Right = m_DPAD.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -225,26 +405,26 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Camera;
-    public struct PlayerActions
+    // Locomotion
+    private readonly InputActionMap m_Locomotion;
+    private List<ILocomotionActions> m_LocomotionActionsCallbackInterfaces = new List<ILocomotionActions>();
+    private readonly InputAction m_Locomotion_Movement;
+    private readonly InputAction m_Locomotion_Camera;
+    public struct LocomotionActions
     {
         private @PlayerControls m_Wrapper;
-        public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Camera => m_Wrapper.m_Player_Camera;
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public LocomotionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Locomotion_Movement;
+        public InputAction @Camera => m_Wrapper.m_Locomotion_Camera;
+        public InputActionMap Get() { return m_Wrapper.m_Locomotion; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerActions instance)
+        public static implicit operator InputActionMap(LocomotionActions set) { return set.Get(); }
+        public void AddCallbacks(ILocomotionActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_LocomotionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LocomotionActionsCallbackInterfaces.Add(instance);
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
@@ -253,7 +433,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Camera.canceled += instance.OnCamera;
         }
 
-        private void UnregisterCallbacks(IPlayerActions instance)
+        private void UnregisterCallbacks(ILocomotionActions instance)
         {
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
@@ -263,21 +443,137 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Camera.canceled -= instance.OnCamera;
         }
 
-        public void RemoveCallbacks(IPlayerActions instance)
+        public void RemoveCallbacks(ILocomotionActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_LocomotionActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPlayerActions instance)
+        public void SetCallbacks(ILocomotionActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_LocomotionActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_LocomotionActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public LocomotionActions @Locomotion => new LocomotionActions(this);
+
+    // Actions
+    private readonly InputActionMap m_Actions;
+    private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
+    private readonly InputAction m_Actions_Roll;
+    private readonly InputAction m_Actions_LightAttack_right;
+    private readonly InputAction m_Actions_HeavyAttack_right;
+    public struct ActionsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Roll => m_Wrapper.m_Actions_Roll;
+        public InputAction @LightAttack_right => m_Wrapper.m_Actions_LightAttack_right;
+        public InputAction @HeavyAttack_right => m_Wrapper.m_Actions_HeavyAttack_right;
+        public InputActionMap Get() { return m_Wrapper.m_Actions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionsActions set) { return set.Get(); }
+        public void AddCallbacks(IActionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ActionsActionsCallbackInterfaces.Add(instance);
+            @Roll.started += instance.OnRoll;
+            @Roll.performed += instance.OnRoll;
+            @Roll.canceled += instance.OnRoll;
+            @LightAttack_right.started += instance.OnLightAttack_right;
+            @LightAttack_right.performed += instance.OnLightAttack_right;
+            @LightAttack_right.canceled += instance.OnLightAttack_right;
+            @HeavyAttack_right.started += instance.OnHeavyAttack_right;
+            @HeavyAttack_right.performed += instance.OnHeavyAttack_right;
+            @HeavyAttack_right.canceled += instance.OnHeavyAttack_right;
+        }
+
+        private void UnregisterCallbacks(IActionsActions instance)
+        {
+            @Roll.started -= instance.OnRoll;
+            @Roll.performed -= instance.OnRoll;
+            @Roll.canceled -= instance.OnRoll;
+            @LightAttack_right.started -= instance.OnLightAttack_right;
+            @LightAttack_right.performed -= instance.OnLightAttack_right;
+            @LightAttack_right.canceled -= instance.OnLightAttack_right;
+            @HeavyAttack_right.started -= instance.OnHeavyAttack_right;
+            @HeavyAttack_right.performed -= instance.OnHeavyAttack_right;
+            @HeavyAttack_right.canceled -= instance.OnHeavyAttack_right;
+        }
+
+        public void RemoveCallbacks(IActionsActions instance)
+        {
+            if (m_Wrapper.m_ActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ActionsActions @Actions => new ActionsActions(this);
+
+    // DPAD
+    private readonly InputActionMap m_DPAD;
+    private List<IDPADActions> m_DPADActionsCallbackInterfaces = new List<IDPADActions>();
+    private readonly InputAction m_DPAD_Left;
+    private readonly InputAction m_DPAD_Right;
+    public struct DPADActions
+    {
+        private @PlayerControls m_Wrapper;
+        public DPADActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Left => m_Wrapper.m_DPAD_Left;
+        public InputAction @Right => m_Wrapper.m_DPAD_Right;
+        public InputActionMap Get() { return m_Wrapper.m_DPAD; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DPADActions set) { return set.Get(); }
+        public void AddCallbacks(IDPADActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DPADActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DPADActionsCallbackInterfaces.Add(instance);
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+        }
+
+        private void UnregisterCallbacks(IDPADActions instance)
+        {
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+        }
+
+        public void RemoveCallbacks(IDPADActions instance)
+        {
+            if (m_Wrapper.m_DPADActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDPADActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DPADActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DPADActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DPADActions @DPAD => new DPADActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -296,9 +592,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeebSchemeIndex];
         }
     }
-    public interface IPlayerActions
+    public interface ILocomotionActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+    }
+    public interface IActionsActions
+    {
+        void OnRoll(InputAction.CallbackContext context);
+        void OnLightAttack_right(InputAction.CallbackContext context);
+        void OnHeavyAttack_right(InputAction.CallbackContext context);
+    }
+    public interface IDPADActions
+    {
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }

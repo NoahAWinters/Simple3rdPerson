@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace STP
+
+namespace Souls
 {
     public class InputHandler : MonoBehaviour
     {
@@ -11,18 +12,28 @@ namespace STP
         public float moveAmount;
         public float mouseX;
         public float mouseY;
+        public bool rollFlag;
+        public bool sprintFlag;
+
+        public Vector2 movementInput;
+
 
         PlayerControls _inputActions;
-        CameraHandler _cameraHandler;
-        Vector2 _movementInput;
-        Vector2 _cameraInput;
+        PlayerManager _manager; Vector2 _cameraInput;
 
 
-
+        public bool b_input;
+        public float b_inputTimer;
+        public bool rb_input;
+        public bool rt_input;
+        public bool dpad_left;
+        public bool dpad_up;
+        public bool dpad_down;
+        public bool dpad_right;
 
         void Start()
         {
-            _cameraHandler = CameraHandler.GetInstance();
+            _manager = PlayerManager.GetInstance();
         }
 
         public void OnEnable()
@@ -30,22 +41,10 @@ namespace STP
             if (_inputActions == null)
             {
                 _inputActions = new PlayerControls();
-                _inputActions.Player.Movement.performed += _inputActions => _movementInput = _inputActions.ReadValue<Vector2>();
-                _inputActions.Player.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
+                _inputActions.Locomotion.Movement.performed += _inputActions => movementInput = _inputActions.ReadValue<Vector2>();
+                _inputActions.Locomotion.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
             }
-
             _inputActions.Enable();
-        }
-
-        void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-
-            if (_cameraHandler != null)
-            {
-                _cameraHandler.FollowTarget(delta);
-                _cameraHandler.CameraRotation(delta, mouseX, mouseY);
-            }
         }
 
         void OnDisable()
@@ -56,19 +55,39 @@ namespace STP
         public void TickInput(float delta)
         {
             MoveInput(delta);
+            RollInput(delta);
         }
 
         void MoveInput(float delta)
         {
-            horizontal = _movementInput.x;
-            vertical = _movementInput.y;
+            horizontal = movementInput.x;
+            vertical = movementInput.y;
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
             mouseX = _cameraInput.x;
             mouseY = _cameraInput.y;
         }
 
+        void RollInput(float delta)
+        {
+            b_input = _inputActions.Actions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+
+            if (b_input)
+            {
+                b_inputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                if (b_inputTimer > 0 && b_inputTimer < .5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+
+                b_inputTimer = 0;
+            }
+        }
+
 
     }
 }
-
-

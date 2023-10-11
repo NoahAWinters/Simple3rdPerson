@@ -2,27 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace STP
+namespace Souls
 {
     public class AnimHandler : MonoBehaviour
     {
+        PlayerManager _pm;
+        InputHandler _inputHandler;
+        PlayerLocomotion _locomotion;
+
+
         public Animator anim;
+
         int vertical;
         int horizontal;
         public bool canRotate = true;
-        public float vv;
-        public float hh;
 
 
 
         public void Initialize()
         {
-            anim.GetComponent<Animator>();
+            _pm = GetComponentInParent<PlayerManager>();
+            anim = GetComponent<Animator>();
+            _inputHandler = GetComponentInParent<InputHandler>();
+            _locomotion = GetComponentInParent<PlayerLocomotion>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
         }
 
-        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
+        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting = false)
         {
             #region Vertical
 
@@ -36,8 +43,6 @@ namespace STP
             else if (verticalMovement < -0.55f)
                 v = -1f;
 
-
-            vv = v;
             #endregion
 
             #region Horizontal
@@ -52,9 +57,13 @@ namespace STP
             else if (horizontalMovement < -0.55f)
                 h = -1f;
 
-            hh = h;
-
             #endregion
+
+            if (isSprinting)
+            {
+                v = 2;
+                h = horizontalMovement;
+            }
 
             if (h == 0 && v == 0)
                 anim.SetBool("idle", true);
@@ -68,5 +77,39 @@ namespace STP
         {
             canRotate = check;
         }
+
+        public void PlayTargetAnim(string targetAnim, bool isInteracting)
+        {
+            anim.applyRootMotion = isInteracting;
+            anim.SetBool("isInteracting", isInteracting);
+            anim.CrossFade(targetAnim, .2f);
+        }
+
+        void OnAnimatorMove()
+        {
+            if (_pm.isInteracting == false)
+                return;
+
+            float delta = Time.deltaTime;
+            _locomotion.rb.drag = 0;
+            Vector3 deltaPos = anim.deltaPosition;
+            deltaPos.y = 0;
+            Vector3 vel = deltaPos / delta;
+            _locomotion.rb.velocity = vel;
+        }
+
+
+        #region Animation Events
+
+        public void EnableCombo()
+        {
+            anim.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            anim.SetBool("canDoCombo", false);
+        }
+        #endregion
     }
 }
